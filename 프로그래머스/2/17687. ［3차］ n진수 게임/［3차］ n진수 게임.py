@@ -1,31 +1,26 @@
 def solution(n, t, m, p):
     answer = ''
-    index=1
-    cur=0
+    index = 0
+    number = 0
     while len(answer) < t:
-        res = make_n(n, cur)
-        for i in range(len(res)):
+        res = convert_to_base(number, n)
+        for char in res:
             if len(answer) >= t:
                 break
-            if index%m==p or (index%p==0 and m==p):
-                answer += res[i]
-            index+=1
-        cur+=1
+            if index % m == p - 1:
+                answer += char
+            index += 1
+        number += 1
     return answer
 
-cor = {10:'A', 11:'B', 12:'C', 13:'D', 14:'E', 15:'F'}
-def make_n(n, number):
-    if not number:
-        return '0'
-    result = ''
-    while number > 1:
-        mod = number % n
-        if mod >= 10:
-            mod = cor[mod]
-        result = str(mod) + result
-        number = number // n
-    if number:
-        result = str(number) + result
+def convert_to_base(num, base):
+    chars = "0123456789ABCDEF"
+    if num == 0:
+        return "0"
+    result = ""
+    while num > 0:
+        result = chars[num % base] + result
+        num //= base
     return result
 
 r = solution(2, 4, 2, 1)
