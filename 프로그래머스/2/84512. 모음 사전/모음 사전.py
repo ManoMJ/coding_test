@@ -1,14 +1,11 @@
 def solution(word):
-    vowels = ['A', 'E', 'I', 'O', 'U']
-    position = {v: i+1 for i, v in enumerate(vowels)}
-    
-    # 각 자리의 가중치
-    weights = [781, 156, 31, 6, 1]
-    
+    vowel='AEIOU'
+    vowels = {char : i for i, char in enumerate(vowel)}
     total = 0
-    
-    for i, char in enumerate(word):
-        total += (position[char] - 1) * weights[i] + 1
-        
+    w = [1+5+25+125+625, 1+5+25+125, 1+5+25, 1+5, 1]
+    pos = 0
+    for c in word:
+        print("total", total)
+        total += vowels[c] * w[pos]  + 1
+        pos+=1
     return total
-
